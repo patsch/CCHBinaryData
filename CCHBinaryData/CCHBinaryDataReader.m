@@ -40,13 +40,13 @@
     abort();
 }
 
-- (instancetype)initWithData:(NSData *)data options:(CCHBinaryDataReaderOptions)options
+- (instancetype)initWithData:(NSData *)data options:(CCHBinaryDataOptions)options
 {
     self = [super init];
     if (self) {
         _data = data;
         _currentPosition = (const uint8_t *)data.bytes;
-        _bigEndian = (options & CCHBinaryDataReaderBigEndian) != 0;
+        _bigEndian = (options & CCHBinaryDataBigEndian) != 0;
     }
     
     return self;

@@ -23,14 +23,9 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "CCHBinaryData.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-/** Options for changing the behavior of this class. */
-typedef NS_OPTIONS(NSUInteger, CCHBinaryDataReaderOptions) {
-    CCHBinaryDataReaderBigEndian = (1UL << 0)    /// Endianess of multi-byte values (default: little endian)
-};
 
 /**
  Reads data from binary input.
@@ -52,7 +47,7 @@ typedef NS_OPTIONS(NSUInteger, CCHBinaryDataReaderOptions) {
  @param data data to read
  @param options changes behavior of this class
  */
-- (instancetype)initWithData:(NSData *)data options:(CCHBinaryDataReaderOptions)options NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithData:(NSData *)data options:(CCHBinaryDataOptions)options NS_DESIGNATED_INITIALIZER;
 
 /**
  Resets the reading position to the begin of the data.

@@ -18,6 +18,7 @@
 		62F0691F199AB2A0001D2DBA /* bigendian.bin in Resources */ = {isa = PBXBuildFile; fileRef = 62F0691B199AB2A0001D2DBA /* bigendian.bin */; };
 		62F06920199AB2A0001D2DBA /* littleendian.bin in Resources */ = {isa = PBXBuildFile; fileRef = 62F0691C199AB2A0001D2DBA /* littleendian.bin */; };
 		62F06924199AB81D001D2DBA /* pngbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F06923199AB81D001D2DBA /* pngbar.png */; };
+		643A66FF1C0842B500534636 /* CCHBinaryDataWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 643A66FE1C0842B500534636 /* CCHBinaryDataWriter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		62F0691B199AB2A0001D2DBA /* bigendian.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = bigendian.bin; path = "../../CCHBinaryData Tests/bigendian.bin"; sourceTree = "<group>"; };
 		62F0691C199AB2A0001D2DBA /* littleendian.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = littleendian.bin; path = "../../CCHBinaryData Tests/littleendian.bin"; sourceTree = "<group>"; };
 		62F06923199AB81D001D2DBA /* pngbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pngbar.png; sourceTree = "<group>"; };
+		643A66FD1C0842B500534636 /* CCHBinaryDataWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHBinaryDataWriter.h; sourceTree = "<group>"; };
+		643A66FE1C0842B500534636 /* CCHBinaryDataWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHBinaryDataWriter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,8 @@
 				62BA16F3199BE1C2004F6F0F /* CCHBinaryData.h */,
 				62F06916199AB281001D2DBA /* CCHBinaryDataReader.h */,
 				62F06917199AB282001D2DBA /* CCHBinaryDataReader.m */,
+				643A66FD1C0842B500534636 /* CCHBinaryDataWriter.h */,
+				643A66FE1C0842B500534636 /* CCHBinaryDataWriter.m */,
 			);
 			name = CCHBinaryData;
 			path = ../CCHBinaryData;
@@ -247,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				643A66FF1C0842B500534636 /* CCHBinaryDataWriter.m in Sources */,
 				62F06918199AB282001D2DBA /* CCHBinaryDataReader.m in Sources */,
 				62CB9CC0199AB17A00887B67 /* ViewController.m in Sources */,
 				62CB9CBD199AB17A00887B67 /* AppDelegate.m in Sources */,

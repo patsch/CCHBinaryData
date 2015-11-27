@@ -34,7 +34,7 @@
 
 @implementation CCHBinaryDataReaderTests
 
-+ (CCHBinaryDataReader *)binaryDataReaderWithFileName:(NSString *)fileName options:(CCHBinaryDataReaderOptions)options
++ (CCHBinaryDataReader *)binaryDataReaderWithFileName:(NSString *)fileName options:(CCHBinaryDataOptions)options
 {
     NSBundle *bundle = [NSBundle bundleForClass:self.class];
     NSString *filePath = [bundle pathForResource:fileName ofType:@"bin"];
@@ -46,7 +46,7 @@
 
 - (void)testReset
 {
-    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataReaderBigEndian];
+    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataBigEndian];
     
     [binaryDataReader skipNumberOfBytes:7];
     XCTAssertEqual([binaryDataReader readUnsignedShort], 11780);
@@ -57,7 +57,7 @@
 
 - (void)testSkipNumberOfBytes
 {
-    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataReaderBigEndian];
+    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataBigEndian];
 
     [binaryDataReader skipNumberOfBytes:7];
     XCTAssertEqual([binaryDataReader readUnsignedShort], 11780);
@@ -68,7 +68,7 @@
 
 - (void)testSetNumberOfBytesRead
 {
-    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataReaderBigEndian];
+    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataBigEndian];
     
     [binaryDataReader setNumberOfBytesRead:7];
     XCTAssertEqual([binaryDataReader readUnsignedShort], 11780);
@@ -79,7 +79,7 @@
 
 - (void)testCanReadNumberOfBytes
 {
-    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataReaderBigEndian];
+    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataBigEndian];
     
     XCTAssertTrue([binaryDataReader canReadNumberOfBytes:1]);
     [binaryDataReader setNumberOfBytesRead:binaryDataReader.data.length - 1];
@@ -94,7 +94,7 @@
 
 - (void)testBigEndian
 {
-    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataReaderBigEndian];
+    CCHBinaryDataReader *binaryDataReader = [self.class binaryDataReaderWithFileName:@"bigendian" options:CCHBinaryDataBigEndian];
     
     XCTAssertEqual([binaryDataReader readChar], 12);
     XCTAssertEqual([binaryDataReader readChar], -12);
