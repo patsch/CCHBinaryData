@@ -43,6 +43,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
+ Initializes this class with data and little endian
+ @param data data to read
+ */
+- (instancetype)initWithData:(NSData *)data;
+
+/**
  Initializes this class with data to read and options.
  @param data data to read
  @param options changes behavior of this class
@@ -93,6 +99,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** Reads unsigned data and advances the current position by eight bytes. */
 - (unsigned long long)readUnsignedLongLong;
 
+/** reads an 8 byte double */
+-(double)readDouble;
+
 /**
  Reads a string with the given encoding until the value '\0' is encountered.
  @param encoding string encoding
@@ -107,6 +116,13 @@ NS_ASSUME_NONNULL_BEGIN
  @return string
  */
 - (NSString *)readStringWithNumberOfBytes:(NSUInteger)numberOfBytes encoding:(NSStringEncoding)encoding;
+
+/** PD - need to read strings in chunks of 16 bit characters for agar.io */
+-(NSString*)readNullTerminatedAgarioString16;
+/** PD - need to read strings in chunks of 8 bit characters for agar.io */
+-(NSString*)readNullTerminatedAgarioString8;
+
+
 
 @end
 

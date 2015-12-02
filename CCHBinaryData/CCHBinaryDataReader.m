@@ -40,6 +40,13 @@
     abort();
 }
 
+
+
+- (instancetype)initWithData:(NSData *)data
+{
+    return [self initWithData:data options:0];
+}
+
 - (instancetype)initWithData:(NSData *)data options:(CCHBinaryDataOptions)options
 {
     self = [super init];
@@ -151,10 +158,84 @@
     return value;
 }
 
+/** reads an 8 byte double */
+-(double)readDouble
+{
+    double val = *(double*)self.currentPosition;
+    [self skipNumberOfBytes:sizeof(double)];
+    return val;
+}
+
 - (unsigned long long)readUnsignedLongLong
 {
     return (unsigned long long)[self readLongLong];
 }
+
+/** PD - need to read strings in chunks of 16 bit characters for agar.io */
+-(NSString*)readNullTerminatedAgarioString16
+{
+    return [self readNullTerminatedAgarioStringWithCharsize:2];
+}
+
+/** PD - need to read strings in chunks of 8 bit characters for agar.io */
+-(NSString*)readNullTerminatedAgarioString8
+{
+    return [self readNullTerminatedAgarioStringWithCharsize:1];
+}
+
+
+/** PD - need to read strings in chunks of 16 bit characters for agar.io */
+-(NSString*)readNullTerminatedAgarioStringWithCharsize:(int)cs
+{
+    
+    unsigned char cx[cs];
+    
+#ifdef MSGDEBUG
+    uint8_t *befp = (uint8_t*) self.currentPosition;
+#endif
+
+    BOOL ende = true;
+    
+    for (int i = 0 ; i < cs ; i++)
+    {
+        cx[i] = [self readUnsignedChar];
+        if (cx[i] != 0)
+        {
+            ende = false;
+        }
+    }
+    
+    NSMutableData *ret = [[NSMutableData alloc] initWithCapacity:64];
+    
+    int cii = 0;
+    // agar.io packets are terminated by DOUBLE 0 !!! exisiting code assumed single 0 byte (I think :-)
+    while (!ende)
+    {
+        [ret appendBytes:&cx[0] length:cs];
+       
+        cii++;
+        
+        ende = true;
+        
+        for (int i = 0 ; i < cs ; i++)
+        {
+            cx[i] = [self readUnsignedChar];
+            if (cx[i] != 0)
+            {
+                ende = false;
+            }
+        }
+
+    }
+    
+#ifdef MSGDEBUG
+    uint8_t *afp = (uint8_t*)self.currentPosition;
+    NSLog(@"readNullTerminatedAgarioString%d : after pos is %ld - bytes skipped %ld",8*cs,(afp - (uint8_t*)self.data.bytes),(afp-befp));
+#endif
+    
+    return [[NSString alloc] initWithData:ret encoding:(cs == 1) ? NSUTF8StringEncoding : NSUTF16LittleEndianStringEncoding];
+}
+
 
 - (NSString *)readNullTerminatedStringWithEncoding:(NSStringEncoding)encoding
 {

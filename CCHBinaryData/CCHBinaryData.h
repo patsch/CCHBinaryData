@@ -25,6 +25,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define LOGDEBUG
+
 /** Options for changing the behavior of this class. */
 typedef NS_OPTIONS(NSUInteger, CCHBinaryDataOptions) {
     CCHBinaryDataBigEndian = (1UL << 0)    /// Endianess of multi-byte values (default: little endian)
